@@ -1,13 +1,5 @@
 import sqlite3
 
 def get_db():
-    conn = sqlite3.connect("billing.db")
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS invoices (
-            id TEXT PRIMARY KEY,
-            amount REAL,
-            status TEXT,
-            synced INTEGER
-        )
-    """)
+    conn = sqlite3.connect("billing.db", check_same_thread=False)
     return conn
