@@ -1,5 +1,5 @@
 import sqlite3
 
 def get_db():
-    conn = sqlite3.connect("billing.db", check_same_thread=False)
+    conn = sqlite3.connect("database.db")
     return conn

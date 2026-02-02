@@ -16,3 +16,9 @@ def insert_bill(db, bill_id, amount, status):
         (bill_id, amount, status)
     )
     db.commit()
+
+from pydantic import BaseModel
+
+class BillRequest(BaseModel):
+    amount: float
+
