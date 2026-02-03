@@ -1,3 +1,3 @@
 class OfflineOnlineAgent:
-    def check_network(self):
-        return True
+    def check_status(self):
+        return "Online"

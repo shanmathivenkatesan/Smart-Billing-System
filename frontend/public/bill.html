@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bill</title>
+  <style>
+    body { font-family: Arial; text-align: center; margin-top: 60px; }
+    input, button { padding: 8px; margin: 5px; }
+  </style>
+</head>
+<body>
+
+  <h2>Generate Bill</h2>
+
+  <form onsubmit="submitBill(event)">
+    <input type="number" id="productId" placeholder="Product ID" required><br>
+    <input type="number" id="qty" placeholder="Quantity" required><br>
+    <input type="number" id="total" placeholder="Total Amount" required><br>
+    <button type="submit">Submit Bill</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    function submitBill(e) {
+      e.preventDefault();
+
+      fetch("http://127.0.0.1:8000/api/bill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product_id: Number(document.getElementById("productId").value),
+          quantity: Number(document.getElementById("qty").value),
+          total: Number(document.getElementById("total").value)
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("result").innerText =
+          "Bill added successfully!";
+      })
+      .catch(err => {
+        document.getElementById("result").innerText =
+          "Error submitting bill";
+      });
+    }
+  </script>
+
+</body>
+</html>

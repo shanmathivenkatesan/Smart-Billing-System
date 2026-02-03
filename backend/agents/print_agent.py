@@ -1,3 +1,4 @@
 class PrintDecisionAgent:
-    def decide(self):
-        return "Printed Successfully"
+    def print_bill(self, bill_data):
+        print("Printing bill:", bill_data)
+        return True

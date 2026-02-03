@@ -1,28 +1,93 @@
+/* --------------------------
+   General Body
+--------------------------- */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f6f8;
-  padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
+/* --------------------------
+   Form Container
+--------------------------- */
+form, .form-container {
+    background-color: #fff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 300px;
+}
+
+/* --------------------------
+   Headings
+--------------------------- */
 h2 {
-  color: #333;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
 }
 
+/* --------------------------
+   Inputs
+--------------------------- */
 input {
-  display: block;
-  margin: 10px 0;
-  padding: 8px;
-  width: 250px;
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.3s;
 }
 
+input:focus {
+    border-color: #4CAF50;
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* --------------------------
+   Buttons
+--------------------------- */
 button {
-  padding: 8px 15px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.3s;
+    margin-top: 15px;
+    width: 100%;
 }
 
 button:hover {
-  background-color: #45a049;
+    background-color: #45a049;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* --------------------------
+   Messages
+--------------------------- */
+p#message {
+    margin-top: 15px;
+    font-size: 14px;
+    min-height: 20px;
+}
+
+/* --------------------------
+   Responsive
+--------------------------- */
+@media (max-width: 400px) {
+    form, .form-container {
+        width: 90%;
+        padding: 30px;
+    }
 }
