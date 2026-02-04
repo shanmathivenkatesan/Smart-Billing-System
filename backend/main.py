@@ -1,70 +1,33 @@
+"""
+Smart Billing System - Main Backend
+Simple FastAPI application for AI-Agentathon hackathon
+"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import uuid
-import datetime
+from routes.billing import router as billing_router
 
-# -------------------------
-# App init
-# -------------------------
-app = FastAPI(title="AIAG03 Smart Billing System")
+# Create FastAPI app
+app = FastAPI(title="Smart Billing System")
 
-# -------------------------
-# CORS (Frontend connect aaga)
-# -------------------------
+# Enable CORS so frontend can talk to backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # frontend allow
+    allow_origins=["*"],  # Allow all origins for local development
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# -------------------------
-# Schemas
-# -------------------------
-class LoginRequest(BaseModel):
-    email: str
-    password: str
+# Include billing routes
+app.include_router(billing_router, prefix="/api")
 
-class BillRequest(BaseModel):
-    amount: float
+@app.get("/")
+def root():
+    """Simple health check"""
+    return {"message": "Smart Billing System API is running"}
 
-# -------------------------
-# TEST API (connection check)
-# -------------------------
-@app.get("/test")
-def test_api():
-    return {"message": "Backend is running successfully"}
-
-# -------------------------
-# LOGIN API (Frontend uses this)
-# -------------------------
-from fastapi import HTTPException
-
-@app.post("/api/login")
-def login(request: LoginRequest):
-    if request.username == "admin" and request.password == "1234":
-        token = str(uuid.uuid4())  # generate dummy token
-        return {
-            "message": "Login successful",
-            "user": request.username,
-            "token": token
-        }
-    else:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
-
-# -------------------------
-# BILL GENERATE API
-# -------------------------
-@app.post("/generate_bill")
-def generate_bill(bill: BillRequest):
-    bill_id = str(uuid.uuid4())
-
-    return {
-        "bill_id": bill_id,
-        "amount": bill.amount,
-        "status": "Generated",
-        "timestamp": datetime.datetime.now().isoformat()
-    }
+if __name__ == "__main__":
+    import uvicorn
+    print("Starting Smart Billing System...")
+    print("Backend running at: http://localhost:8000")
+    uvicorn.run(app, host="0.0.0.0", port=8000)
